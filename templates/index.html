@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PoliPitch – AI Startup Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .card {
+            min-height: 300px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container text-center">
+    <h1 class="mb-4">🚀 PoliPitch</h1>
+    <p class="mb-4">Describe a problem or industry. Get a startup idea + pitch instantly.</p>
+
+    <form method="POST" class="input-group mb-5">
+        <input name="industry" class="form-control" placeholder="e.g. climate tech, loneliness, student burnout" required>
+        <button type="submit" class="btn btn-primary">Generate</button>
+    </form>
+
+    {% if slides %}
+    <div id="pitchCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner text-start">
+
+            <div class="carousel-item active">
+                <div class="card p-4">
+                    <h5>1. Startup Name + One-liner</h5>
+                    <p><strong>{{ slides.name }}</strong></p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card p-4">
+                    <h5>2. Problem</h5>
+                    <p>{{ slides.problem }}</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card p-4">
+                    <h5>3. Solution</h5>
+                    <p>{{ slides.solution }}</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card p-4">
+                    <h5>4. Key Features</h5>
+                    <p>{{ slides.features }}</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card p-4">
+                    <h5>5. Business Model</h5>
+                    <p>{{ slides.business_model }}</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card p-4">
+                    <h5>6. Pitch Slide Structure</h5>
+                    <p>{{ slides.pitch_slides }}</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card p-4">
+                    <h5>7. Investor Pitch</h5>
+                    <p>{{ slides.investor_pitch }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#pitchCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            <span style="position: absolute; left: -60px; top: 45%; font-weight: bold; font-size: 1.2rem;">← Prev</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#pitchCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            <span style="position: absolute; right: -60px; top: 45%; font-weight: bold; font-size: 1.2rem;">Next →</span>
+        </button>
+    </div>
+
+    <!-- Export to PDF -->
+    <form action="/export" method="POST">
+        <input type="hidden" name="slides" id="slideContent">
+        <button type="submit" class="btn btn-danger mt-3" onclick="prepareSlides()">📄 Export Pitch as PDF</button>
+    </form>
+    {% endif %}
+</div>
+
+<!-- Bootstrap + Slide Capture -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function prepareSlides() {
+    const slideHTML = document.querySelector("#pitchCarousel").outerHTML;
+    document.getElementById("slideContent").value = `
+        <html><head><style>
+            body { font-family: sans-serif; padding: 40px; }
+            h3 { color: #333; }
+            .carousel-item { margin-bottom: 20px; page-break-after: always; }
+        </style></head><body>${slideHTML}</body></html>`;
+}
+</script>
+
+</body>
+</html>
