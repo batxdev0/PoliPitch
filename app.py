@@ -23,17 +23,19 @@ def index():
 from flask import make_response
 from weasyprint import HTML
 
+from flask import make_response
+from weasyprint import HTML
+
 @app.route("/export", methods=["POST"])
 def export_pdf():
-    slides = request.form.get("slides")  # Get raw HTML sent from frontend
-
-    html = HTML(string=slides)
-    pdf = html.write_pdf()
-
+    slides_html = request.form.get("slides")
+    pdf = HTML(string=slides_html).write_pdf()
+    
     response = make_response(pdf)
-    response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'attachment; filename=pitch_deck.pdf'
+    response.headers["Content-Type"] = "application/pdf"
+    response.headers["Content-Disposition"] = "attachment; filename=pitch_deck.pdf"
     return response
+
 
 
 
