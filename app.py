@@ -24,7 +24,7 @@ from flask import make_response
 from weasyprint import HTML
 
 from flask import make_response
-from weasyprint.html import HTML
+from weasyprint import HTML
 
 @app.route("/export", methods=["POST"])
 def export_pdf():
