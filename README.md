@@ -1,6 +1,14 @@
-# 🚀 PoliPitch – AI Startup Generator & Slide Deck Builder
+# 🚀 PoliPitch – AI Startup Generator
 
-**PoliPitch** is a Flask-based web tool that uses GPT‑4 to generate startup ideas and automatically present them as a pitch deck. Designed for entrepreneurs, students, and startup dreamers — PoliPitch helps you go from idea to slides in seconds.
+PoliPitch is a web app that instantly generates startup ideas + pitch decks based on any industry or pain point using GPT‑4.
+
+### 🌍 Try it Live
+[![Try PoliPitch](https://img.shields.io/badge/Try%20PoliPitch-Live%20Demo-brightgreen?style=for-the-badge&logo=rocket)](https://polipitch.onrender.com)
+
+👉 [https://polipitch.onrender.com](https://polipitch.onrender.com)
+
+> Enter any industry (e.g., "student loneliness", "climate tech") and get a complete AI-generated pitch deck with exportable PDF.
+
 
 ---
 
